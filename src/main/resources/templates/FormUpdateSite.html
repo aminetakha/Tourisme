@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Ajuter Site</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="container">
+<div class="card">
+<div class="card-header">Formualire d'Ajout Site</div>
+<div class="card-body">
+<form th:action="@{Update}" method="post" th:object=${site} enctype="multipart/form-data">
+ <input class="form-control" type="hidden" th:field=*{reference}/>
+ <label>Nom</label>
+ <input class="form-control" type="text" th:field=*{nomSite}/>
+ <span class="text-danger" th:errors="*{nomSite}"></span>
+ <label>Description</label>
+ <input class="form-control" type="text" th:field=*{description}>
+ <span class="text-danger" th:errors="*{description}"></span>
+  <label>Date de Creation</label>
+ <input class="form-control" type="date" th:field=*{dateCreation}>
+  <span class="text-danger" th:errors="*{dateCreation}"></span>
+   <label>Tarif</label>
+ <input class="form-control" type="text" th:field=*{tarif}>
+  <span class="text-danger" th:errors="*{dateCreation}"></span>
+   <label>Superficie</label>
+ <input class="form-control" type="text" th:field=*{superficie}>
+   <label>Capacite</label>
+ <input class="form-control" type="text" th:field=*{capacite}>
+  <label>Region</label>
+  <select name="region" class="form-control">
+   <option  th:text="${r.nom}" th:each="r:${regions}" 
+   th:value="${r.idRegion}" th:selected="${r==site.region}"></option>
+  </select>
+  <label></label>
+ <img th:src="@{getPhoto(id=${site.reference})}" width="150" height=""/>
+ <input class="form-control" type="file" name="photo">
+ <input class="btn btn-primary m-2" type="submit" value="Modifier">
+</form>
+</div>
+</div>
+</div>
+
+</body>
+</html>
